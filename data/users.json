@@ -1,8 +1,8 @@
 [
 	{
 		"id": 1,
-		"first_name": "Meyer",
-		"last_name": "Sebright",
+		"first_name": "Tuan",
+		"last_name": "Dao",
 		"email": "daotuan.bk96@gmail.com",
 		"password": "1",
 		"favorite": [5, 25, 6, 7, 11, 30, 8, 13]
@@ -21,142 +21,6 @@
 		"last_name": "Braithwaite",
 		"email": "cbraithwaite2@printfriendly.com",
 		"password": "LbD2bZo",
-		"favorite": []
-	},
-	{
-		"id": 4,
-		"first_name": "Nate",
-		"last_name": "Garroway",
-		"email": "ngarroway3@theglobeandmail.com",
-		"password": "ZNmryIeP0",
-		"favorite": []
-	},
-	{
-		"id": 5,
-		"first_name": "Dex",
-		"last_name": "Lesper",
-		"email": "dlesper4@hugedomains.com",
-		"password": "Hcy36rH0l6Z",
-		"favorite": []
-	},
-	{
-		"id": 6,
-		"first_name": "Ulrick",
-		"last_name": "Tudball",
-		"email": "utudball5@hao123.com",
-		"password": "kk2phJVW",
-		"favorite": []
-	},
-	{
-		"id": 7,
-		"first_name": "Alis",
-		"last_name": "Hucknall",
-		"email": "ahucknall6@studiopress.com",
-		"password": "5zuszdDj7rc",
-		"favorite": []
-	},
-	{
-		"id": 8,
-		"first_name": "Olia",
-		"last_name": "Rhodef",
-		"email": "orhodef7@vistaprint.com",
-		"password": "y6DW17O",
-		"favorite": []
-	},
-	{
-		"id": 9,
-		"first_name": "Dermot",
-		"last_name": "Parry",
-		"email": "dparry8@about.me",
-		"password": "XvSH7F",
-		"favorite": []
-	},
-	{
-		"id": 10,
-		"first_name": "Shellie",
-		"last_name": "Challender",
-		"email": "schallender9@narod.ru",
-		"password": "O71yEuv3OIN",
-		"favorite": []
-	},
-	{
-		"id": 11,
-		"first_name": "Tallulah",
-		"last_name": "Toten",
-		"email": "ttotena@discovery.com",
-		"password": "aGx9isW",
-		"favorite": []
-	},
-	{
-		"id": 12,
-		"first_name": "Dorothee",
-		"last_name": "Paffley",
-		"email": "dpaffleyb@state.gov",
-		"password": "j27oJ4Dj49y",
-		"favorite": []
-	},
-	{
-		"id": 13,
-		"first_name": "Adora",
-		"last_name": "Vercruysse",
-		"email": "avercruyssec@microsoft.com",
-		"password": "A6iBI9cqHHr",
-		"favorite": []
-	},
-	{
-		"id": 14,
-		"first_name": "Thatch",
-		"last_name": "Raecroft",
-		"email": "traecroftd@pbs.org",
-		"password": "iZwbB5uqfz3i",
-		"favorite": []
-	},
-	{
-		"id": 15,
-		"first_name": "Torey",
-		"last_name": "Queste",
-		"email": "tquestee@i2i.jp",
-		"password": "LwrNBw",
-		"favorite": []
-	},
-	{
-		"id": 16,
-		"first_name": "Edsel",
-		"last_name": "Panyer",
-		"email": "epanyerf@comcast.net",
-		"password": "wzrjhBGjDd5z",
-		"favorite": []
-	},
-	{
-		"id": 17,
-		"first_name": "Jard",
-		"last_name": "Weigh",
-		"email": "jweighg@house.gov",
-		"password": "0Ng3jnl",
-		"favorite": []
-	},
-	{
-		"id": 18,
-		"first_name": "Maddie",
-		"last_name": "Linley",
-		"email": "mlinleyh@themeforest.net",
-		"password": "xSfc3n7PPbdG",
-		"favorite": []
-	},
-	{
-		"id": 19,
-		"first_name": "Suzann",
-		"last_name": "Rapp",
-		"email": "srappi@51.la",
-		"password": "ZJJBJb0T",
-		"favorite": []
-	},
-	{
-		"id": 20,
-		"first_name": "Carter",
-		"last_name": "Tayler",
-		"email": "ctaylerj@chron.com",
-		"password": "AQH53ofCsc",
 		"favorite": []
 	}
 ]

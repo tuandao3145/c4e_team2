@@ -51,6 +51,9 @@ const main = () => {
 	//logo
 	let $logo = document.getElementById("logo");
 
+	// search bar
+	let $searchBox = document.getElementById("search-box");
+
 	// nav-bar buttons
 	let $signInBtn = document.getElementById("signin-btn");
 	let $signUpBtn = document.getElementById("signup-btn");
@@ -159,6 +162,11 @@ const main = () => {
 	// back to home, when clcking home option on sidebar
 	$collectionBtn.addEventListener("click", () => {
 		userPageRender();
+	});
+
+	// search food when typing
+	$searchBox.addEventListener("input", () => {
+		searchFood();
 	});
 
 	//--- DATABASE FUNCTIONS ---//
@@ -411,14 +419,11 @@ const main = () => {
 	`;
 	};
 
-	// show food cards on landing
-	const showLandingFoodCards = () => {
-		// get food list from DB
-		let food_list = dbGetFood();
-		let landing_food_list = food_list.slice(0, 6);
+	// show food cards list
+	const showFoodCardsList = (food_list) => {
 		// create food cards list content
 		let foodCardListContent = "";
-		for (let food of landing_food_list) {
+		for (let food of food_list) {
 			foodCardListContent += createFoodCard(food);
 		}
 		// add food cards list content
@@ -426,6 +431,15 @@ const main = () => {
 		$foodCardList.style.display = "flex";
 		//
 		getFoodCards();
+	};
+
+	// show food cards on landing
+	const showLandingFoodCards = () => {
+		// get food list from DB
+		let food_list = dbGetFood();
+		let landing_food_list = food_list.slice(0, 9);
+		//
+		showFoodCardsList(landing_food_list);
 	};
 
 	// show user favorite food list
@@ -442,16 +456,24 @@ const main = () => {
 				}
 			}
 		}
-		// create food cards list content
-		let foodCardListContent = "";
-		for (let food of user_favorite_food_list) {
-			foodCardListContent += createFoodCard(food);
-		}
-		// add food cards list content
-		$foodCardList.innerHTML = foodCardListContent;
-		$foodCardList.style.display = "flex";
 		//
-		getFoodCards();
+		showFoodCardsList(user_favorite_food_list);
+	};
+
+	// search food
+	const searchFood = () => {
+		let searchInput = $searchBox.value.toUpperCase();
+		console.log(searchInput);
+		let food_list = dbGetFood();
+		let searchResult = [];
+		for (let food of food_list) {
+			if (food["name"].toUpperCase().includes(searchInput) == true) {
+				searchResult.push(food);
+			}
+		}
+		//
+		showFoodCardsList(searchResult);
+		window.scrollTo(0, 400);
 	};
 
 	//--- DISPLAY FUNCTIONS---//
@@ -468,6 +490,8 @@ const main = () => {
 		//
 		$collectionTitle.style.display = "none";
 		showLandingFoodCards();
+		//
+		$foodPage.style.display = "none";
 		// scroll to top
 		window.scrollTo(0, 0);
 	};
@@ -485,6 +509,8 @@ const main = () => {
 		//
 		$collectionTitle.style.display = "none";
 		showLandingFoodCards();
+		//
+		$foodPage.style.display = "none";
 		// scroll to top
 		window.scrollTo(0, 0);
 	};
@@ -566,15 +592,28 @@ const main = () => {
 	};
 
 	const showFoodDetail = (food) => {
+		// let foodDetail = `
+		//   <div class="food-content center">
+		//     <div class="food-img">
+		//       <img src=${food["thumbnail"]} />
+		//     </div>
+		//     <div class="food-name">
+		//       <span>${food["name"]}</span>
+		//     </div>
+		//     <div class="food-des">
+		//       <span>
+		//         ${food["description"]}
+		//       </span>
+		//     </div>
+		//   </div>
+		// `;
 		let foodDetail = `
-    <div class="food-card center">
-      <div class="food-card-content center"> 
-        <div class="food-id">${food["id"]}</div>
+      <div class="food-content center"> 
         <div class="food-img">
           <img src=${food["thumbnail"]} />
         </div>
         <div class="food-name">
-          <span>${food["name"]}</span>
+          <h2>${food["name"]}</h2>
         </div>
         <div class="food-des">
           <span>
@@ -582,10 +621,9 @@ const main = () => {
           </span>
         </div>
       </div>
-      <button class="card-btn">Cook this!</button>
-    </div>
     `;
 		$foodPage.innerHTML = foodDetail;
+		$foodPage.style.display = "flex";
 	};
 
 	//--- RUNNING FUNCTIONS ---//
