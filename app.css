@@ -155,6 +155,7 @@ Mobile: 360x640
 	background-color: #c2deff;
 	border-radius: 20px;
 	transition: 0.5s;
+	border: 2px solid #167dfe;
 }
 
 .body #side-bar a {
@@ -230,6 +231,7 @@ Mobile: 360x640
 }
 
 .body .main #food-card-list .food-card .food-card-content {
+	width: 300px;
 	max-width: 300px;
 	height: 400px;
 	flex-direction: column;
@@ -310,6 +312,7 @@ Mobile: 360x640
 
 /* food page */
 .body .main #food-page {
+	height: 100%;
 	display: none;
 	border-radius: 20px;
 	width: 100%;
@@ -328,9 +331,96 @@ Mobile: 360x640
 	border-radius: 10px;
 	padding: 20px;
 	transition: 0.5s;
+	gap: 10px;
 }
 
-.body .main #food-page .food-content {
+.body .main #food-page .food-content .food-img {
+	width: 100%;
+}
+
+.body .main #food-page .food-content .food-img img {
+	border-radius: 20px;
+	border: 3px solid #ff6363;
+}
+
+.body .main #food-page .food-content .food-name {
+}
+
+.body .main #food-page .food-content .food-des {
+	width: 50%;
+}
+
+.body .main #food-page .food-content .directions {
+	width: 100%;
+	height: 100%;
+	align-items: flex-start;
+	gap: 20px;
+	padding: 10px;
+	justify-content: space-between;
+}
+
+.body .main #food-page .food-content .directions .food-ingredients {
+	flex: 1;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.body .main #food-page .food-content .directions .vertical-line {
+	background-color: #167dfe;
+	height: 500px;
+	width: 1px;
+}
+
+.body .main #food-page .food-content .directions .food-steps {
+	flex: 3;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.body .main #food-page .food-content .directions .food-steps .steps {
+	width: 100%;
+	flex: 3;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.body
+	.main
+	#food-page
+	.food-content
+	.directions
+	.food-steps
+	.steps
+	.step-detail {
+	width: 100%;
+	gap: 10px;
+	justify-content: space-between;
+}
+
+.body
+	.main
+	#food-page
+	.food-content
+	.directions
+	.food-steps
+	.steps
+	.step-detail
+	.step-id {
+	flex: 1;
+	font-size: 50px;
+	max-width: 30px;
+}
+
+.body
+	.main
+	#food-page
+	.food-content
+	.directions
+	.food-steps
+	.steps
+	.step-detail
+	.step-content {
+	flex: 10;
 }
 
 /* CUSTOM MODAL */

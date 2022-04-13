@@ -1,49 +1,100 @@
+//--- PRE-SETUP ---//
+// set root page
+const root = "http://127.0.0.1:5500/";
+const landingPage = root + "index.html";
+
+// import users list
+const importUsers = () => {
+	// if "users" list is not in Local Storage, fetch it from users.json
+	if (localStorage.getItem("users") == null) {
+		let users_data_url = "./data/users.json";
+		fetch(users_data_url)
+			.then((response) => response.json())
+			.then((data) => {
+				localStorage.setItem("users", JSON.stringify(data));
+			})
+			.catch((error) => console.log(error));
+	}
+};
+
+// imoport food list
+const importFood = () => {
+	// if "food" list is not in Local Storage, fetch it from food.json
+	if (localStorage.getItem("food") == null) {
+		let food_data_url = "./data/food.json";
+		fetch(food_data_url)
+			.then((response) => response.json())
+			.then((data) => {
+				localStorage.setItem("food", JSON.stringify(data));
+			})
+			.catch((error) => console.log(error));
+	}
+};
+
+// create variable to store logged users
+const initLogged = () => {
+	if (sessionStorage.getItem("logged") == null) {
+		sessionStorage.setItem("logged", JSON.stringify(""));
+	}
+};
+
 // main app
 const main = () => {
-	//--- PRE-SETUP ---//
-	// set root page
-	const root = "http://127.0.0.1:5500/";
-	const landingPage = root + "index.html";
+	//--- DATABASE FUNCTIONS ---//
+	// get users list from DB
+	const dbGetUsers = () => {
+		return JSON.parse(localStorage.getItem("users"));
+	};
 
-	// import users list
-	const importUsers = () => {
-		// if "users" list is not in Local Storage, fetch it from users.json
-		if (localStorage.getItem("users") == null) {
-			let users_data_url = "./data/users.json";
-			fetch(users_data_url)
-				.then((response) => response.json())
-				.then((data) => {
-					localStorage.setItem("users", JSON.stringify(data));
-				})
-				.catch((error) => console.log(error));
+	// save users list to DB
+	const dbSaveUsers = (data) => {
+		localStorage.setItem("users", JSON.stringify(data));
+	};
+
+	// get logged user
+	const loggedUser = () => {
+		return JSON.parse(sessionStorage.getItem("logged"));
+	};
+
+	// save logged user
+	const saveLogged = (userID) => {
+		sessionStorage.setItem("logged", JSON.stringify(userID));
+	};
+
+	// get favorite of logged user
+	const getFavorite = (userID) => {
+		// get users list from DB
+		let users = dbGetUsers();
+		for (let user of users) {
+			if (user["id"] == userID) {
+				return user["favorite"];
+			}
 		}
 	};
 
-	// imoport food list
-	const importFood = () => {
-		// if "food" list is not in Local Storage, fetch it from food.json
-		if (localStorage.getItem("food") == null) {
-			let food_data_url = "./data/food.json";
-			fetch(food_data_url)
-				.then((response) => response.json())
-				.then((data) => {
-					localStorage.setItem("food", JSON.stringify(data));
-				})
-				.catch((error) => console.log(error));
+	// save favorite of logged user
+	const addFavoriteFood = (userID, foodID) => {
+		// get food list from DB
+		let users = dbGetUsers();
+		// push new food to user favorite food list
+		for (let user of users) {
+			if (user["id"] == userID) {
+				user["favorite"].push(foodID);
+			}
 		}
+		// save new users list to DB
+		dbSaveUsers(users);
 	};
 
-	// create variable to store logged users
-	const initLogged = () => {
-		if (sessionStorage.getItem("logged") == null) {
-			sessionStorage.setItem("logged", JSON.stringify(""));
-		}
+	// get food list from DB
+	const dbGetFood = () => {
+		return JSON.parse(localStorage.getItem("food"));
 	};
 
-	// setup DB
-	importUsers();
-	importFood();
-	initLogged();
+	// save food list to DB
+	const dbSaveFood = (data) => {
+		localStorage.setItem("food", JSON.stringify(data));
+	};
 
 	//--- ELEMENTS ---//
 	let $app = document.getElementById("app");
@@ -140,7 +191,6 @@ const main = () => {
 
 		// call function createNewUser from users.js
 		creatNewUser(first_name, last_name, email, password);
-		signInUser(email, password);
 	});
 
 	// signout user
@@ -168,52 +218,6 @@ const main = () => {
 	$searchBox.addEventListener("input", () => {
 		searchFood();
 	});
-
-	//--- DATABASE FUNCTIONS ---//
-	// get users list from DB
-	const dbGetUsers = () => {
-		return JSON.parse(localStorage.getItem("users"));
-	};
-
-	// save users list to DB
-	const dbSaveUsers = (data) => {
-		localStorage.setItem("users", JSON.stringify(data));
-	};
-
-	// get logged user
-	const loggedUser = () => {
-		return JSON.parse(sessionStorage.getItem("logged"));
-	};
-
-	// save logged user
-	const saveLogged = (userID) => {
-		sessionStorage.setItem("logged", JSON.stringify(userID));
-	};
-
-	// get favorite of logged user
-	const getFavorite = (userID) => {
-		// get users list from DB
-		let users = dbGetUsers();
-		for (let user of users) {
-			if (user["id"] == userID) {
-				return user["favorite"];
-			}
-		}
-	};
-
-	// save favorite of logged user
-	const addFavoriteFood = (userID, foodID) => {
-		// get food list from DB
-		let users = dbGetUsers();
-		// push new food to user favorite food list
-		for (let user of users) {
-			if (user["id"] == userID) {
-				user["favorite"].push(foodID);
-			}
-		}
-		// save new users list to DB
-		dbSaveUsers(users);
-	};
 
 	//--- MODALS FUNCTIONS ---//
 	// open a modal
@@ -320,6 +324,7 @@ const main = () => {
 
 		// verify password
 		if (password.length < 6) {
+			loggedUser("hello");
 			alertShortPassword();
 		}
 
@@ -327,7 +332,7 @@ const main = () => {
 		for (let user of users) {
 			if (user.email == email) {
 				// call function alertExistUser from modals.js
-				closeModal($signUpModal);
+				$signUpForm.password.value = "";
 				alertExistUser();
 				return;
 			}
@@ -349,6 +354,8 @@ const main = () => {
 
 		// save new users list to DB
 		dbSaveUsers(users);
+		// signin for newly created user
+		signInUser(email, password);
 	};
 
 	// signin as a user
@@ -386,15 +393,6 @@ const main = () => {
 	};
 
 	//--- FOOD FUNCTIONS ---//
-	// get food list from DB
-	const dbGetFood = () => {
-		return JSON.parse(localStorage.getItem("food"));
-	};
-
-	// save food list to DB
-	const dbSaveFood = (data) => {
-		localStorage.setItem("food", JSON.stringify(data));
-	};
 
 	// create food card
 	const createFoodCard = (food) => {
@@ -437,7 +435,7 @@ const main = () => {
 	const showLandingFoodCards = () => {
 		// get food list from DB
 		let food_list = dbGetFood();
-		let landing_food_list = food_list.slice(0, 9);
+		let landing_food_list = food_list.slice(0, 12);
 		//
 		showFoodCardsList(landing_food_list);
 	};
@@ -474,6 +472,66 @@ const main = () => {
 		//
 		showFoodCardsList(searchResult);
 		window.scrollTo(0, 400);
+	};
+	const showFoodDetail = (food) => {
+		//
+		let foodIngredients = ``;
+		for (let item of food["ingredients"]) {
+			let ingredient = `
+      <li>
+        <span>${item}</span>
+      </li>
+      `;
+			foodIngredients += ingredient;
+		}
+		//
+		let stepContent = ``;
+		for (let step of food["steps"]) {
+			let stepDetail = `
+      <li class="step-detail center">
+        <div class="step-id">
+        ${step["id"]}
+        </div>
+        <div class="step-content">
+        ${step["content"]}
+        </div>
+      </li>      
+    `;
+			stepContent += stepDetail;
+		}
+		//
+		let foodDetail = `
+      <div class="food-content center"> 
+        <div class="food-img center">
+          <img src=${food["thumbnail"]} />
+        </div>
+        <div class="food-name">
+          <h2>${food["name"]}</h2>
+        </div>
+        <div class="food-des">
+          <span>
+            ${food["description"]}
+          </span>
+        </div>
+        <div class="directions center">
+          <div class="food-ingredients center">
+            <h3>Ingredients:</h3>
+            <ul class="ingredients">
+              ${foodIngredients}
+            </ul>
+          </div>
+          <div class="vertical-line"></div>
+          <div class="food-steps center">
+            <h3>Directions:</h3>
+            <ul class="steps center">
+              ${stepContent}
+            </ul>
+          </div>
+        </div>
+      </div>
+    `;
+		$foodPage.innerHTML = foodDetail;
+		$foodPage.style.display = "flex";
 	};
 
 	//--- DISPLAY FUNCTIONS---//
@@ -591,41 +649,6 @@ const main = () => {
 		}
 	};
 
-	const showFoodDetail = (food) => {
-		// let foodDetail = `
-		//   <div class="food-content center">
-		//     <div class="food-img">
-		//       <img src=${food["thumbnail"]} />
-		//     </div>
-		//     <div class="food-name">
-		//       <span>${food["name"]}</span>
-		//     </div>
-		//     <div class="food-des">
-		//       <span>
-		//         ${food["description"]}
-		//       </span>
-		//     </div>
-		//   </div>
-		// `;
-		let foodDetail = `
-      <div class="food-content center"> 
-        <div class="food-img">
-          <img src=${food["thumbnail"]} />
-        </div>
-        <div class="food-name">
-          <h2>${food["name"]}</h2>
-        </div>
-        <div class="food-des">
-          <span>
-            ${food["description"]}
-          </span>
-        </div>
-      </div>
-    `;
-		$foodPage.innerHTML = foodDetail;
-		$foodPage.style.display = "flex";
-	};
-
 	//--- RUNNING FUNCTIONS ---//
 	// verify being on root or landing page
 	// if (window.location.href == root || window.location.href == landingPage) {
@@ -644,5 +667,19 @@ const main = () => {
 
 //--- WAIT DOM LOADED ---//
 document.addEventListener("DOMContentLoaded", () => {
-	main();
+	// setup DB
+	importUsers();
+	importFood();
+	initLogged();
+	// wait for data loading
+	if (
+		JSON.parse(localStorage.getItem("users")) == undefined ||
+		JSON.parse(localStorage.getItem("food")) == undefined
+	) {
+		setTimeout(() => {
+			main();
+		}, 2000);
+	} else {
+		main();
+	}
 });
