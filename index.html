@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- meta -->
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Google Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- fontawesome CSS -->
+		<link
+			rel="stylesheet"
+			href="//use.fontawesome.com/releases/v5.0.7/css/all.css"
+		/>
+		<!-- swiper CSS -->
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/swiper/swiper-bundle.min.css"
+		/>
+		<!-- my CSS -->
+		<link rel="stylesheet" href="./app.css" />
+		<!-- my JS -->
+		<script type="text/javascript" src="./app.js"></script>
+		<!-- title -->
+		<title>Men's cookbook</title>
+	</head>
+	<body>
+		<div id="app">
+			<header class="header center">
+				<!-- logo -->
+				<div class="logo-container center">
+					<img src="./img/asset/beard.png" id="logo" />
+					<h3>Men's cookbook</h3>
+				</div>
+				<!-- nav-bar -->
+				<div class="nav-list center">
+					<form class="search-form center">
+						<input type="text" placeholder="What's for today?" />
+						<i class="fas fa-search"></i>
+					</form>
+					<div class="btn-list center">
+						<button id="signin-btn" class="center">
+							<i class="fas fa-sign-in-alt"></i>
+							<span>Log In</span>
+						</button>
+						<button id="signup-btn" class="center">
+							<i class="fas fa-user-plus"></i>
+							<span>Sign Up</span>
+						</button>
+						<button id="signout-btn" class="center">
+							<i class="fas fa-user-plus"></i>
+							<span>Sign Out</span>
+						</button>
+					</div>
+				</div>
+			</header>
+			<section class="body center">
+				<!-- side-bar -->
+				<div id="side-bar" class="center">
+					<a id="go-home">Home</a>
+					<a id="go-collection">Collection</a>
+				</div>
+				<!--  -->
+				<!-- main-content -->
+				<div class="main center">
+					<!-- intro -->
+					<div id="intro" class="center">
+						<div class="intro-content">
+							<h2>Welcome to the best Men's cookbook</h2>
+							<p>
+								It is true when they say men have more taste in their hands as
+								compared to women.
+								<br />
+								This sounds like inequality, but it is a common statement that
+								is famously spoken and used worldwide.
+								<br />
+								Maybe we don’t expect much from men, so when they achieve
+								something wonderful in the kitchen, they show praises.
+							</p>
+						</div>
+					</div>
+					<!--  -->
+					<!-- food cards list -->
+					<div id="collection-title" class="center">
+						<h1>Your Dish Collection Here!!!</h1>
+					</div>
+					<div id="food-card-list" class="center">
+						<!-- food cards will be loaded by script -->
+					</div>
+					<!--  -->
+					<!-- food page -->
+					<div id="food-page" class="center">
+						<!-- food page will be loaded by script -->
+					</div>
+					<!--  -->
+				</div>
+				<!--  -->
+			</section>
+			<footer></footer>
+			<!-- modal -->
+			<!-- signin modal -->
+			<div id="signin-modal" class="modal">
+				<div class="modal-content center">
+					<form id="signin-form">
+						<h2>Access your delicious dish collection</h2>
+						<div>
+							<label for="email">Your Email:</label>
+							<input type="text" name="email" />
+						</div>
+						<div>
+							<label for="password">Password</label>
+							<input type="password" name="password" />
+						</div>
+						<button>Sign In</button>
+					</form>
+					<span class="close-btn"><i class="fas fa-times"></i></span>
+				</div>
+			</div>
+			<!-- -->
+			<!-- signup modal -->
+			<div id="signup-modal" class="modal">
+				<div class="modal-content center">
+					<form id="signup-form">
+						<h2>Be a Chef for your woman now!</h2>
+						<div>
+							<label for="first_name">First Name</label>
+							<input type="text" name="first_name" />
+						</div>
+						<div>
+							<label for="last_name">Last Name</label>
+							<input type="text" name="last_name" />
+						</div>
+						<div>
+							<label for="email">Email</label>
+							<input type="text" name="email" />
+						</div>
+						<div>
+							<label for="password">Password</label>
+							<input type="password" name="password" />
+						</div>
+						<button>Register</button>
+					</form>
+					<span class="close-btn"><i class="fas fa-times"></i></span>
+				</div>
+			</div>
+			<!-- alert existing user -->
+			<div id="alert-modal" class="modal">
+				<div class="modal-content center">
+					<div id="alert-content" class="center"></div>
+					<span class="close-btn"><i class="fas fa-times"></i></span>
+				</div>
+			</div>
+			<!--  -->
+		</div>
+	</body>
+</html>
