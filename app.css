@@ -36,7 +36,7 @@ Mobile: 360x640
 	height: 70px;
 	width: 100%;
 
-	position: sticky;
+	position: fixed;
 	top: 0;
 
 	justify-content: space-between;
@@ -143,6 +143,7 @@ Mobile: 360x640
 	padding: 20px;
 	gap: 20px;
 }
+
 /* side-bar */
 .body #side-bar {
 	position: sticky;
@@ -168,13 +169,23 @@ Mobile: 360x640
 	text-decoration: none;
 }
 
+.body #side-bar:hover,
+.body #side-bar a:hover {
+	transform: scale(1.2);
+}
+
 /* main content */
 .body .main {
 	flex-direction: column;
 	flex: 9;
 	gap: 20px;
 	max-width: 100%;
-	margin: auto;
+	margin: 70px auto;
+}
+
+.body .main #collection-title {
+	color: #167dfe;
+	font-size: 30px;
 }
 
 /* intro */
@@ -201,11 +212,6 @@ Mobile: 360x640
 .body .main #intro .intro-content h2 {
 	color: black;
 	text-align: center;
-}
-
-.body #side-bar:hover,
-.body #side-bar a:hover {
-	transform: scale(1.2);
 }
 
 /* food cards list */
@@ -444,12 +450,14 @@ Mobile: 360x640
 	margin: 15% auto; /* 15% from the top and centered */
 	padding: 20px;
 	border: 1px solid #888;
-	height: 300px;
+	height: 400px;
 	width: 80%; /* Could be more or less, depending on screen size */
 	position: relative;
 	display: flex;
-	align-items: flex-start;
 	border-radius: 20px;
+	flex-direction: column;
+	gap: 20px;
+	justify-content: space-between;
 }
 
 /* close buttons */
@@ -459,7 +467,8 @@ Mobile: 360x640
 	font-size: 28px;
 	font-weight: bold;
 	position: fixed;
-	right: 150px;
+	right: 160px;
+	top: 200px;
 }
 
 .close-btn:hover,
@@ -477,4 +486,58 @@ Mobile: 360x640
 
 #alert-content * {
 	text-align: end;
+}
+
+/* modal signin */
+#signin-form,
+#signup-form {
+	flex-direction: column;
+	gap: 20px;
+	width: 60%;
+}
+
+#signin-form div,
+#signup-form div {
+	width: 90%;
+	justify-content: space-between;
+	transition: 0.5s;
+}
+
+#signin-form div label,
+#signup-form div label {
+	flex: 1;
+	transition: 0.5s;
+}
+
+#signin-form div input,
+#signup-form div input {
+	height: 40px;
+	flex: 3;
+	border-radius: 15px;
+	padding: 10px;
+	transition: 0.5s;
+}
+
+#signin-form button,
+#signup-form button {
+	height: 40px;
+	width: 100px;
+	color: #167dfe;
+	background-color: #c2deff;
+	border-radius: 10px;
+	padding: auto;
+	border: 2px solid #167dfe;
+	gap: 5px;
+	transition: 0.4s;
+}
+
+#signin-form div:hover,
+#signup-form div:hover,
+#signin-form button:hover,
+#signup-form button:hover {
+	transform: scale(1.1);
+}
+/*  */
+.glow {
+	color: red;
 }

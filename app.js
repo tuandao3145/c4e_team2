@@ -114,6 +114,7 @@ const main = () => {
 	let $sideBar = document.getElementById("side-bar");
 	let $homeBtn = document.getElementById("go-home");
 	let $collectionBtn = document.getElementById("go-collection");
+	let $allFoodBtn = document.getElementById("all-food");
 
 	// intro
 	let $intro = document.getElementById("intro");
@@ -196,7 +197,7 @@ const main = () => {
 	// signout user
 	$signOutBtn.addEventListener("click", () => {
 		signOutUser();
-		noUserHomeRender();
+		homeMainRender();
 	});
 
 	// back to home, when clcking logo
@@ -204,14 +205,19 @@ const main = () => {
 		homeMainRender();
 	});
 
-	// back to home, when clcking home option on sidebar
+	// back to home when clcking home option on sidebar
 	$homeBtn.addEventListener("click", () => {
 		homeMainRender();
 	});
 
-	// back to home, when clcking home option on sidebar
+	// Go to user collection when clcking home option on sidebar
 	$collectionBtn.addEventListener("click", () => {
 		userPageRender();
+	});
+
+	// Go to all food page when clcking home option on sidebar
+	$allFoodBtn.addEventListener("click", () => {
+		allFoodPageRender();
 	});
 
 	// search food when typing
@@ -326,6 +332,7 @@ const main = () => {
 		if (password.length < 6) {
 			loggedUser("hello");
 			alertShortPassword();
+			return;
 		}
 
 		// validate existing user by email
@@ -440,6 +447,14 @@ const main = () => {
 		showFoodCardsList(landing_food_list);
 	};
 
+	// show food cards on landing
+	const showAllFoodCards = () => {
+		// get food list from DB
+		let food_list = dbGetFood();
+		//
+		showFoodCardsList(food_list);
+	};
+
 	// show user favorite food list
 	const showUserFavorite = (userID) => {
 		// get food list from DB
@@ -535,33 +550,25 @@ const main = () => {
 	};
 
 	//--- DISPLAY FUNCTIONS---//
-	// homepage while no user logged
-	const noUserHomeRender = () => {
-		//
-		$signInBtn.style.display = "block";
-		$signUpBtn.style.display = "block";
-		$signOutBtn.style.display = "none";
-		//
-		$sideBar.style.display = "none";
-		//
-		$intro.style.display = "flex";
-		//
-		$collectionTitle.style.display = "none";
-		showLandingFoodCards();
-		//
-		$foodPage.style.display = "none";
-		// scroll to top
-		window.scrollTo(0, 0);
-	};
-
-	// homepage while user logged
-	const userHomeRender = () => {
-		//
-		$signInBtn.style.display = "none";
-		$signUpBtn.style.display = "none";
-		$signOutBtn.style.display = "block";
-		//
-		$sideBar.style.display = "flex";
+	// home render
+	const homeMainRender = () => {
+		smoothLoad();
+		// check whether logged user or not
+		if (loggedUser() == "") {
+			// render homepage WITHOUT logged user
+			$signInBtn.style.display = "block";
+			$signUpBtn.style.display = "block";
+			$signOutBtn.style.display = "none";
+			//
+			$sideBar.style.display = "none";
+		} else {
+			// render homepage WITH logged user
+			$signInBtn.style.display = "none";
+			$signUpBtn.style.display = "none";
+			$signOutBtn.style.display = "block";
+			//
+			$sideBar.style.display = "flex";
+		}
 		//
 		$intro.style.display = "flex";
 		//
@@ -586,27 +593,40 @@ const main = () => {
 		//
 		$intro.style.display = "none";
 		//
+		$collectionTitle.innerHTML = `<h1>Your Dish Collection Here!!!</h1>`;
 		$collectionTitle.style.display = "flex";
 		showUserFavorite(userID);
+		//
+		$foodPage.style.display = "none";
 		// scroll to top
 		window.scrollTo(0, 0);
+		//
 	};
 
-	// home render
-	const homeMainRender = () => {
+	const allFoodPageRender = () => {
 		smoothLoad();
-		// check whether logged user or not
-		if (loggedUser() == "") {
-			// render homepage WITHOUT logged user
-			noUserHomeRender();
-		} else {
-			// render homepage WITH logged user
-			userHomeRender(loggedUser());
-		}
+		let userID = loggedUser();
+		//
+		$signInBtn.style.display = "none";
+		$signUpBtn.style.display = "none";
+		$signOutBtn.style.display = "block";
+		//
+		$sideBar.style.display = "flex";
+		//
+		$intro.style.display = "none";
+		//
+		$collectionTitle.innerHTML = `<h1>All Our Dishes For You Here!!!</h1>`;
+		$collectionTitle.style.display = "flex";
+		showAllFoodCards();
+		//
+		$foodPage.style.display = "none";
+		// scroll to top
+		window.scrollTo(0, 0);
+		//
 	};
 
 	// render food page
-	const renderFoodPage = (foodID) => {
+	const foodPageRender = (foodID) => {
 		smoothLoad();
 		if (loggedUser() == "") {
 			// render homepage WITHOUT logged user
@@ -635,6 +655,8 @@ const main = () => {
 				showFoodDetail(food);
 			}
 		}
+		//
+		window.scrollTo(0, 0);
 	};
 
 	const getFoodCards = () => {
@@ -644,16 +666,10 @@ const main = () => {
 			let $cookBtn = $card.querySelector(".card-btn");
 			let foodID = $card.querySelector(".food-id").innerHTML;
 			$cookBtn.addEventListener("click", (e) => {
-				renderFoodPage(foodID);
+				foodPageRender(foodID);
 			});
 		}
 	};
-
-	//--- RUNNING FUNCTIONS ---//
-	// verify being on root or landing page
-	// if (window.location.href == root || window.location.href == landingPage) {
-	// 	homeMainRender();
-	// }
 
 	// smooth load
 	const smoothLoad = () => {

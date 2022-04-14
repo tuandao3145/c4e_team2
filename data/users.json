@@ -4,7 +4,7 @@
 		"first_name": "Tuan",
 		"last_name": "Dao",
 		"email": "daotuan.bk96@gmail.com",
-		"password": "1",
+		"password": "123456",
 		"favorite": [5, 25, 6, 7, 11, 30, 8, 13]
 	},
 	{
@@ -12,7 +12,7 @@
 		"first_name": "Patten",
 		"last_name": "Thackray",
 		"email": "pthackray1@people.com.cn",
-		"password": "Ykenzd",
+		"password": "Abc@1234",
 		"favorite": []
 	},
 	{
@@ -20,7 +20,7 @@
 		"first_name": "Cass",
 		"last_name": "Braithwaite",
 		"email": "cbraithwaite2@printfriendly.com",
-		"password": "LbD2bZo",
+		"password": "123123",
 		"favorite": []
 	}
 ]
