@@ -561,6 +561,7 @@ const main = () => {
 			$signOutBtn.style.display = "none";
 			//
 			$sideBar.style.display = "none";
+			$collectionBtn.style.display = "none";
 		} else {
 			// render homepage WITH logged user
 			$signInBtn.style.display = "none";
@@ -568,6 +569,7 @@ const main = () => {
 			$signOutBtn.style.display = "block";
 			//
 			$sideBar.style.display = "flex";
+			$collectionBtn.style.display = "flex";
 		}
 		//
 		$intro.style.display = "flex";
@@ -590,6 +592,7 @@ const main = () => {
 		$signOutBtn.style.display = "block";
 		//
 		$sideBar.style.display = "flex";
+		$collectionBtn.style.display = "flex";
 		//
 		$intro.style.display = "none";
 		//
